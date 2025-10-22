@@ -5,6 +5,7 @@ import corsMiddleware from './utils/validateCORS.js';
 import productorouter from './router/productoRouter.js';
 import validateJWT from './utils/validateJWT.js';
 import jwt from 'jsonwebtoken';
+import ventaRouter from './router/ventaRouter.js';
 
 import {conectar} from './config/db.js';
 conectar();
@@ -45,6 +46,7 @@ app.use(validateJWT);
 
 //Middleware para exponer mis rutas y puedan ser accedidas
 app.use('/api/productos', validateJWT, productorouter);
+app.use('/api/ventas', ventaRouter);
 
 app.use((req,res,next)=>{
     const error = new AppError(`No se ha podido acceder a ${req.originalUrl} en el servidor`, 404);
